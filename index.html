@@ -9,6 +9,13 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
 <style>
+/* ─────────────────────────────────────────
+   REPLACE THIS VALUE WITH YOUR FORMSPREE ID
+   Go to formspree.io → New Form → copy the
+   ID from the endpoint URL e.g. "xyzabcde"
+   Then search this file for FORMSPREE_ID
+───────────────────────────────────────── */
+
 :root {
   --bg: #0a0a0b;
   --bg2: #111113;
@@ -29,9 +36,7 @@
 }
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
 html { scroll-behavior: smooth; }
-
 body {
   background: var(--bg);
   color: var(--text);
@@ -42,7 +47,6 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-/* ── NOISE OVERLAY ── */
 body::before {
   content: '';
   position: fixed;
@@ -53,7 +57,6 @@ body::before {
   opacity: 0.6;
 }
 
-/* ── GRID LINES ── */
 .grid-bg {
   position: fixed;
   inset: 0;
@@ -66,7 +69,6 @@ body::before {
   mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, black 30%, transparent 100%);
 }
 
-/* ── NAV ── */
 nav {
   position: fixed;
   top: 0; left: 0; right: 0;
@@ -119,14 +121,11 @@ nav {
   transition: background 0.15s, transform 0.1s;
   letter-spacing: 0.02em;
 }
-
 .nav-cta:hover { background: var(--accent2); transform: translateY(-1px); }
 .nav-cta:active { transform: translateY(0); }
 
-/* ── SECTIONS ── */
 section { position: relative; z-index: 1; }
 
-/* ── HERO ── */
 .hero {
   min-height: 100vh;
   display: flex;
@@ -150,7 +149,6 @@ section { position: relative; z-index: 1; }
   opacity: 0;
   animation: fadeUp 0.6s ease 0.1s forwards;
 }
-
 .hero-tag::before, .hero-tag::after {
   content: '';
   width: 32px; height: 1px;
@@ -169,12 +167,8 @@ h1 {
   opacity: 0;
   animation: fadeUp 0.7s ease 0.2s forwards;
 }
-
 h1 .accent { color: var(--accent); }
-h1 .strike {
-  position: relative;
-  color: var(--muted);
-}
+h1 .strike { position: relative; color: var(--muted); }
 h1 .strike::after {
   content: '';
   position: absolute;
@@ -195,10 +189,8 @@ h1 .strike::after {
   opacity: 0;
   animation: fadeUp 0.7s ease 0.35s forwards;
 }
-
 .hero-sub strong { color: var(--text); font-weight: 400; }
 
-/* ── EMAIL FORM ── */
 .form-wrap {
   width: 100%;
   max-width: 480px;
@@ -208,14 +200,12 @@ h1 .strike::after {
 
 .email-form {
   display: flex;
-  gap: 0;
   border: 1px solid var(--border-hover);
   border-radius: 6px;
   overflow: hidden;
   background: var(--bg2);
   transition: border-color 0.2s;
 }
-
 .email-form:focus-within { border-color: var(--accent); }
 
 .email-form input {
@@ -228,7 +218,6 @@ h1 .strike::after {
   color: var(--text);
   outline: none;
 }
-
 .email-form input::placeholder { color: var(--muted2); }
 
 .email-form button {
@@ -244,18 +233,14 @@ h1 .strike::after {
   transition: background 0.15s;
   white-space: nowrap;
 }
-
 .email-form button:hover { background: var(--accent2); }
+.email-form button:disabled { opacity: 0.6; cursor: not-allowed; }
 
 .form-note {
   margin-top: 12px;
   font-size: 12px;
   color: var(--muted);
   font-family: var(--mono);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 6px;
 }
 
 .founding-badge {
@@ -271,7 +256,30 @@ h1 .strike::after {
   margin-top: 14px;
 }
 
-/* ── SOCIAL PROOF TICKER ── */
+.success-msg {
+  display: none;
+  text-align: center;
+  padding: 14px;
+  font-family: var(--mono);
+  font-size: 13px;
+  color: var(--accent);
+  border: 1px solid rgba(200,240,96,0.3);
+  border-radius: 5px;
+  margin-top: 8px;
+}
+
+.error-msg {
+  display: none;
+  text-align: center;
+  padding: 10px;
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--red);
+  border: 1px solid rgba(255,90,74,0.3);
+  border-radius: 5px;
+  margin-top: 8px;
+}
+
 .ticker-wrap {
   margin-top: 72px;
   width: 100%;
@@ -286,7 +294,6 @@ h1 .strike::after {
   animation: ticker 28s linear infinite;
   white-space: nowrap;
 }
-
 @keyframes ticker {
   from { transform: translateX(0); }
   to { transform: translateX(-50%); }
@@ -300,13 +307,11 @@ h1 .strike::after {
   color: var(--muted);
   flex-shrink: 0;
 }
-
 .ticker-item .val { font-family: var(--mono); color: var(--text); }
 .ticker-item .pos { color: var(--green); }
 .ticker-item .neg { color: var(--red); }
 .ticker-divider { color: var(--muted2); }
 
-/* ── AI PREVIEW (mock debrief card) ── */
 .ai-preview {
   padding: 100px 24px;
   display: flex;
@@ -342,7 +347,6 @@ h1 .strike::after {
   font-weight: 300;
 }
 
-/* mock debrief card */
 .debrief-card {
   width: 100%;
   max-width: 680px;
@@ -361,11 +365,7 @@ h1 .strike::after {
   background: var(--bg3);
 }
 
-.debrief-header-left {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
+.debrief-header-left { display: flex; align-items: center; gap: 10px; }
 
 .debrief-dot {
   width: 8px; height: 8px;
@@ -395,7 +395,6 @@ h1 .strike::after {
   padding: 14px 0;
   border-bottom: 1px solid var(--border);
 }
-
 .finding:last-child { border-bottom: none; }
 
 .finding-num {
@@ -416,7 +415,6 @@ h1 .strike::after {
   text-transform: uppercase;
   margin-bottom: 5px;
 }
-
 .label-warn { color: var(--red); }
 .label-info { color: var(--amber); }
 .label-good { color: var(--green); }
@@ -440,7 +438,6 @@ h1 .strike::after {
   border-radius: 3px;
   color: var(--muted);
 }
-
 .finding-stat .stat-val { color: var(--text); }
 
 .debrief-rule {
@@ -453,10 +450,8 @@ h1 .strike::after {
   color: var(--muted);
   line-height: 1.55;
 }
-
 .debrief-rule strong { color: var(--accent); font-weight: 500; }
 
-/* type cursor blink */
 .cursor {
   display: inline-block;
   width: 2px; height: 14px;
@@ -467,7 +462,6 @@ h1 .strike::after {
 }
 @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
 
-/* ── FEATURES ── */
 .features {
   padding: 100px 24px;
   max-width: 1100px;
@@ -490,7 +484,6 @@ h1 .strike::after {
   padding: 32px 28px;
   transition: background 0.2s;
 }
-
 .feat:hover { background: var(--bg2); }
 
 .feat-icon {
@@ -520,14 +513,12 @@ h1 .strike::after {
   font-weight: 300;
 }
 
-/* ── STATS BAR ── */
 .stats-bar {
   padding: 60px 24px;
   border-top: 1px solid var(--border);
   border-bottom: 1px solid var(--border);
   display: flex;
   justify-content: center;
-  gap: 0;
   flex-wrap: wrap;
 }
 
@@ -536,7 +527,6 @@ h1 .strike::after {
   padding: 20px 48px;
   border-right: 1px solid var(--border);
 }
-
 .stat-item:last-child { border-right: none; }
 
 .stat-val-big {
@@ -555,7 +545,6 @@ h1 .strike::after {
   font-weight: 300;
 }
 
-/* ── WHO IT'S FOR ── */
 .personas {
   padding: 100px 24px;
   max-width: 900px;
@@ -578,7 +567,6 @@ h1 .strike::after {
   padding: 22px 20px;
   transition: border-color 0.2s;
 }
-
 .persona:hover { border-color: var(--border-hover); }
 
 .persona-who {
@@ -596,10 +584,8 @@ h1 .strike::after {
   line-height: 1.6;
   font-weight: 300;
 }
-
 .persona-pain strong { color: var(--text); font-weight: 400; }
 
-/* ── FOUNDING OFFER ── */
 .founding {
   padding: 100px 24px;
   display: flex;
@@ -641,7 +627,6 @@ h1 .strike::after {
   justify-content: center;
   gap: 8px;
 }
-
 .founding-eyebrow::before, .founding-eyebrow::after {
   content: '';
   width: 20px; height: 1px;
@@ -658,7 +643,6 @@ h1 .strike::after {
   line-height: 1;
   margin-bottom: 4px;
 }
-
 .founding-price sub {
   font-size: 22px;
   font-weight: 500;
@@ -671,7 +655,6 @@ h1 .strike::after {
   color: var(--muted);
   margin-bottom: 6px;
 }
-
 .founding-normal s { color: var(--muted2); }
 
 .founding-lock {
@@ -699,7 +682,6 @@ h1 .strike::after {
   font-weight: 300;
   line-height: 1.4;
 }
-
 .founding-feat::before {
   content: '→';
   color: var(--accent);
@@ -726,7 +708,6 @@ h1 .strike::after {
   outline: none;
   transition: border-color 0.2s;
 }
-
 .founding-form input:focus { border-color: var(--accent); }
 .founding-form input::placeholder { color: var(--muted2); }
 
@@ -743,9 +724,9 @@ h1 .strike::after {
   cursor: pointer;
   transition: background 0.15s, transform 0.1s;
 }
-
 .founding-form button:hover { background: var(--accent2); transform: translateY(-1px); }
 .founding-form button:active { transform: translateY(0); }
+.founding-form button:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
 
 .spots-left {
   margin-top: 14px;
@@ -753,10 +734,8 @@ h1 .strike::after {
   font-size: 11px;
   color: var(--muted);
 }
-
 .spots-left span { color: var(--amber); }
 
-/* ── FOOTER ── */
 footer {
   border-top: 1px solid var(--border);
   padding: 32px 40px;
@@ -780,7 +759,6 @@ footer {
   color: var(--muted2);
 }
 
-/* ── ANIMATIONS ── */
 @keyframes fadeUp {
   from { opacity: 0; transform: translateY(20px); }
   to { opacity: 1; transform: translateY(0); }
@@ -796,26 +774,8 @@ footer {
   transform: translateY(24px);
   transition: opacity 0.65s ease, transform 0.65s ease;
 }
+.reveal.visible { opacity: 1; transform: translateY(0); }
 
-.reveal.visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* ── SUCCESS STATE ── */
-.success-msg {
-  display: none;
-  text-align: center;
-  padding: 14px;
-  font-family: var(--mono);
-  font-size: 13px;
-  color: var(--accent);
-  border: 1px solid rgba(200,240,96,0.3);
-  border-radius: 5px;
-  margin-top: 8px;
-}
-
-/* ── RESPONSIVE ── */
 @media (max-width: 640px) {
   nav { padding: 0 20px; }
   .hero { padding: 100px 20px 60px; }
@@ -830,7 +790,6 @@ footer {
 
 <div class="grid-bg"></div>
 
-<!-- NAV -->
 <nav>
   <a href="#" class="logo">
     <span class="logo-dot"></span>
@@ -839,7 +798,6 @@ footer {
   <a href="#founding" class="nav-cta">Get founding access</a>
 </nav>
 
-<!-- HERO -->
 <section class="hero">
   <div class="hero-tag">AI-powered trading journal</div>
 
@@ -854,16 +812,16 @@ footer {
   </p>
 
   <div class="form-wrap">
-    <form class="email-form" id="hero-form" onsubmit="handleSubmit(event,'hero-form','hero-success')">
-      <input type="email" id="hero-email" placeholder="your@email.com" required autocomplete="email">
-      <button type="submit">Get early access →</button>
+    <form class="email-form" id="hero-form" onsubmit="handleSubmit(event,'hero-form','hero-success','hero-error')">
+      <input type="email" name="email" placeholder="your@email.com" required autocomplete="email">
+      <button type="submit" id="hero-btn">Get early access →</button>
     </form>
     <div class="form-note">No credit card. No spam. Unsubscribe anytime.</div>
     <div class="founding-badge">⚡ Founding member pricing — $19/mo locked forever</div>
-    <div id="hero-success" class="success-msg">You're on the list. Check your email.</div>
+    <div id="hero-success" class="success-msg">You're on the list. Check your email for next steps.</div>
+    <div id="hero-error" class="error-msg">Something went wrong. Try again or email us directly.</div>
   </div>
 
-  <!-- Ticker -->
   <div class="ticker-wrap">
     <div class="ticker" id="ticker">
       <span class="ticker-item"><span class="val">Win rate</span> 41% → <span class="pos">58%</span></span>
@@ -880,7 +838,7 @@ footer {
       <span class="ticker-divider">·</span>
       <span class="ticker-item">Rule compliance <span class="pos">38% → 81%</span></span>
       <span class="ticker-divider">·</span>
-      <span class="ticker-item">Win rate <span class="val">41%</span> → <span class="pos">58%</span></span>
+      <span class="ticker-item"><span class="val">Win rate</span> 41% → <span class="pos">58%</span></span>
       <span class="ticker-divider">·</span>
       <span class="ticker-item">After-hours trades: <span class="neg">-$2,340 avg loss</span></span>
       <span class="ticker-divider">·</span>
@@ -897,7 +855,6 @@ footer {
   </div>
 </section>
 
-<!-- AI PREVIEW -->
 <section class="ai-preview">
   <div class="section-label reveal">What you get every Sunday</div>
   <h2 class="section-title reveal">Your AI trading coach,<br>working overnight.</h2>
@@ -912,7 +869,6 @@ footer {
       <span class="debrief-date">Sun, Apr 6 · 47 trades analyzed</span>
     </div>
     <div class="debrief-body">
-
       <div class="finding">
         <div class="finding-num">01</div>
         <div class="finding-content">
@@ -921,7 +877,6 @@ footer {
           <div class="finding-stat">Afternoon P&L: <span class="stat-val" style="color:var(--red)">-$1,840 this week</span></div>
         </div>
       </div>
-
       <div class="finding">
         <div class="finding-num">02</div>
         <div class="finding-content">
@@ -930,7 +885,6 @@ footer {
           <div class="finding-stat">Oversized trades: <span class="stat-val">9 instances</span> &nbsp;·&nbsp; Avg loss: <span class="stat-val" style="color:var(--red)">-$356</span></div>
         </div>
       </div>
-
       <div class="finding">
         <div class="finding-num">03</div>
         <div class="finding-content">
@@ -939,7 +893,6 @@ footer {
           <div class="finding-stat">Morning setups: <span class="stat-val" style="color:var(--green)">+$4,120 this week</span></div>
         </div>
       </div>
-
       <div class="debrief-rule">
         <strong>Rule to implement this week:</strong> No trades after 1:45pm EST. Set a hard cutoff in your rules. Your data says the market stops working for you — stop fighting it.<span class="cursor"></span>
       </div>
@@ -947,14 +900,12 @@ footer {
   </div>
 </section>
 
-<!-- FEATURES -->
 <section class="features">
   <div style="text-align:center">
     <div class="section-label reveal">What's inside</div>
     <h2 class="section-title reveal" style="margin:0 auto 16px">Everything a serious trader needs.<br>Nothing they don't.</h2>
     <p class="section-sub reveal" style="margin:0 auto 0">Built for traders who want to get better, not just track their P&L.</p>
   </div>
-
   <div class="features-grid reveal">
     <div class="feat">
       <div class="feat-icon">📓</div>
@@ -979,7 +930,7 @@ footer {
     <div class="feat">
       <div class="feat-icon">📋</div>
       <div class="feat-title">Rulebook + compliance</div>
-      <div class="feat-desc">Define your trading rules once. Every trade is checked against them in real-time. Your compliance % tracked weekly so you can see yourself improving.</div>
+      <div class="feat-desc">Define your trading rules once. Every trade is checked against them in real-time. Your compliance % is tracked weekly so you can see yourself improving.</div>
     </div>
     <div class="feat">
       <div class="feat-icon">💬</div>
@@ -989,7 +940,6 @@ footer {
   </div>
 </section>
 
-<!-- STATS -->
 <div class="stats-bar reveal">
   <div class="stat-item">
     <div class="stat-val-big">8+</div>
@@ -1009,7 +959,6 @@ footer {
   </div>
 </div>
 
-<!-- PERSONAS -->
 <section class="personas">
   <div class="section-label reveal">Who it's for</div>
   <h2 class="section-title reveal">If you trade more than twice a week,<br>you need this.</h2>
@@ -1020,7 +969,7 @@ footer {
     </div>
     <div class="persona">
       <div class="persona-who">Algo / systematic trader</div>
-      <div class="persona-pain">Your system is solid — but you keep <strong>overriding it</strong>. We track your manual interventions and show you what they cost.</div>
+      <div class="persona-pain">Your system is solid — but you keep <strong>overriding it</strong>. We track your manual interventions and show you exactly what they cost.</div>
     </div>
     <div class="persona">
       <div class="persona-who">Prediction market trader</div>
@@ -1033,7 +982,6 @@ footer {
   </div>
 </section>
 
-<!-- FOUNDING OFFER -->
 <section class="founding" id="founding">
   <div class="section-label reveal">Limited offer</div>
   <h2 class="section-title reveal" style="margin-bottom:40px">Founding member pricing</h2>
@@ -1054,46 +1002,63 @@ footer {
       <div class="founding-feat">Direct access to the founder — you shape what we build</div>
     </div>
 
-    <form class="founding-form" id="founding-form" onsubmit="handleSubmit(event,'founding-form','founding-success')">
-      <input type="email" id="founding-email" placeholder="your@email.com" required autocomplete="email">
-      <button type="submit">Claim founding member spot →</button>
+    <form class="founding-form" id="founding-form" onsubmit="handleSubmit(event,'founding-form','founding-success','founding-error')">
+      <input type="email" name="email" placeholder="your@email.com" required autocomplete="email">
+      <button type="submit" id="founding-btn">Claim founding member spot →</button>
     </form>
     <div id="founding-success" class="success-msg">Locked in. You'll hear from us within 24 hours.</div>
+    <div id="founding-error" class="error-msg">Something went wrong. Email us at hello@tradedebrief.com</div>
     <div class="spots-left">Only <span>47 spots</span> remaining at this price.</div>
   </div>
 </section>
 
-<!-- FOOTER -->
 <footer>
   <span class="footer-logo">TradeDebrief</span>
   <span class="footer-note">© 2025 TradeDebrief · Built by traders, for traders</span>
 </footer>
 
 <script>
-function handleSubmit(e, formId, successId) {
+// ─────────────────────────────────────────────────────────
+//  STEP 1: Go to formspree.io, sign up free, create a form
+//  STEP 2: Replace FORMSPREE_ID below with your actual ID
+//          e.g. if your endpoint is formspree.io/f/xyzabcde
+//          then set FORMSPREE_ID = 'xyzabcde'
+// ─────────────────────────────────────────────────────────
+const FORMSPREE_ID = 'FORMSPREE_ID';
+
+async function handleSubmit(e, formId, successId, errorId) {
   e.preventDefault();
+
   const form = document.getElementById(formId);
-  const btn = form.querySelector('button');
+  const btn = form.querySelector('button[type=submit]');
   const emailInput = form.querySelector('input[type=email]');
-  const email = emailInput.value;
+  const email = emailInput.value.trim();
 
   btn.textContent = 'Saving...';
-  btn.style.opacity = '0.7';
+  btn.disabled = true;
 
-  setTimeout(() => {
-    form.style.display = 'none';
-    const msg = document.getElementById(successId);
-    msg.style.display = 'block';
+  try {
+    const res = await fetch(`https://formspree.io/f/${FORMSPREE_ID}`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify({ email, form: formId, source: window.location.href })
+    });
 
-    if (formId === 'hero-form') {
-      document.querySelector('.form-note').style.display = 'none';
-      document.querySelector('.founding-badge').style.display = 'none';
+    if (res.ok) {
+      form.style.display = 'none';
+      document.getElementById(successId).style.display = 'block';
+      if (formId === 'hero-form') {
+        document.querySelector('.form-note').style.display = 'none';
+        document.querySelector('.founding-badge').style.display = 'none';
+      }
+    } else {
+      throw new Error('Server error');
     }
-
-    console.log('Waitlist signup:', email);
-    // INTEGRATION POINT: POST to your Resend/Mailchimp/Supabase endpoint here
-    // fetch('/api/waitlist', { method: 'POST', body: JSON.stringify({ email }), headers: { 'Content-Type': 'application/json' } })
-  }, 900);
+  } catch {
+    btn.textContent = 'Try again →';
+    btn.disabled = false;
+    document.getElementById(errorId).style.display = 'block';
+  }
 }
 
 const observer = new IntersectionObserver((entries) => {
