@@ -1091,7 +1091,19 @@ function handleSubmit(e, formId, successId) {
     }
 
     console.log('Waitlist signup:', email);
-    // INTEGRATION POINT: POST to your Resend/Mailchimp/Supabase endpoint here
+    fetch('https://api.resend.com/emails', {
+  method: 'POST',
+  headers: {
+    'Authorization': 'Bearer YOUR_RESEND_API_KEY',
+    'Content-Type': 'application/json'
+  },
+  body: JSON.stringify({
+    from: 'waitlist@tradedebrief.com',
+    to: 'your@email.com',
+    subject: 'New waitlist signup',
+    text: `New signup: ${email}`
+  })
+})
     // fetch('/api/waitlist', { method: 'POST', body: JSON.stringify({ email }), headers: { 'Content-Type': 'application/json' } })
   }, 900);
 }
