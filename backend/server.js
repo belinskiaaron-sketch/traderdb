@@ -11,14 +11,26 @@ const resend = new Resend(process.env.RESEND_API_KEY);
 app.use(cors());
 app.use(express.json());
 
-app.get("/", (req, res) => res.send("OK"));
+const BUILD_ID = "v1.03-diagnostic";
+
+app.get("/", (req, res) => {
+  res.json({
+    status: "OK",
+    build: BUILD_ID,
+    hasResendKey: Boolean(process.env.RESEND_API_KEY),
+    resendKeyPrefix: process.env.RESEND_API_KEY
+      ? process.env.RESEND_API_KEY.slice(0, 6) + "..."
+      : null,
+    node: process.version,
+  });
+});
 
 app.post("/api/signup", async (req, res) => {
   const { email, form, source } = req.body;
+  console.log("[signup] incoming:", { email, form, source });
 
   try {
-    // 1. Welcome email to user
-    await resend.emails.send({
+    const welcome = await resend.emails.send({
       from: "TradeDebrief <onboarding@tradedb.space>",
       to: email,
       subject: "You're on the TradeDebrief waitlist ⚡",
@@ -28,19 +40,20 @@ app.post("/api/signup", async (req, res) => {
         <p>You're joining from: ${source}</p>
       `,
     });
+    console.log("[signup] welcome result:", JSON.stringify(welcome));
 
-    // 2. Notify owner
-    await resend.emails.send({
+    const notify = await resend.emails.send({
       from: "TradeDebrief <onboarding@tradedb.space>",
       to: "aaronbelinski@gmail.com",
       subject: "New signup",
       html: `<p>${email} just joined from ${form} (source: ${source})</p>`,
     });
+    console.log("[signup] notify result:", JSON.stringify(notify));
 
-    res.status(200).json({ success: true });
+    res.status(200).json({ success: true, welcome, notify });
   } catch (err) {
-    console.error(err);
-    res.status(500).json({ error: "Email failed" });
+    console.error("[signup] error:", err);
+    res.status(500).json({ error: "Email failed", detail: String(err?.message || err) });
   }
 });
 
