@@ -15,9 +15,21 @@ app.post("/api/signup", async (req, res) => {
   const { email, form, source } = req.body;
 
   try {
-    // Notify owner — resend.dev domain can only send to your own account email
+    // 1. Welcome email to user
     await resend.emails.send({
-      from: "TradeDebrief <onboarding@resend.dev>",
+      from: "TradeDebrief <onboarding@tradedebrief.com>",
+      to: email,
+      subject: "You're on the TradeDebrief waitlist ⚡",
+      html: `
+        <h2>You're in.</h2>
+        <p>We'll analyze your trading behavior every Sunday.</p>
+        <p>You're joining from: ${source}</p>
+      `,
+    });
+
+    // 2. Notify owner
+    await resend.emails.send({
+      from: "TradeDebrief <onboarding@tradedebrief.com>",
       to: "aaronbelinski@gmail.com",
       subject: "New signup",
       html: `<p>${email} just joined from ${form} (source: ${source})</p>`,
