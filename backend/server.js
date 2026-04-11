@@ -41,6 +41,7 @@ app.post("/api/signup", async (req, res) => {
       `,
     });
     console.log("[signup] welcome result:", JSON.stringify(welcome));
+    if (welcome?.error) throw new Error(welcome.error.message || "welcome send failed");
 
     const notify = await resend.emails.send({
       from: "TradeDebrief <onboarding@tradedb.space>",
@@ -49,8 +50,9 @@ app.post("/api/signup", async (req, res) => {
       html: `<p>${email} just joined from ${form} (source: ${source})</p>`,
     });
     console.log("[signup] notify result:", JSON.stringify(notify));
+    if (notify?.error) throw new Error(notify.error.message || "notify send failed");
 
-    res.status(200).json({ success: true, welcome, notify });
+    res.status(200).json({ success: true });
   } catch (err) {
     console.error("[signup] error:", err);
     res.status(500).json({ error: "Email failed", detail: String(err?.message || err) });
