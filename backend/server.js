@@ -31,7 +31,7 @@ app.post("/api/signup", async (req, res) => {
 
   try {
     const welcome = await resend.emails.send({
-      from: "TradeDebrief <onboarding@tradedb.space>",
+      from: "TradeDebrief <onboarding@traderdb.space>",
       to: email,
       subject: "You're on the TradeDebrief waitlist ⚡",
       html: `
@@ -44,7 +44,7 @@ app.post("/api/signup", async (req, res) => {
     if (welcome?.error) throw new Error(welcome.error.message || "welcome send failed");
 
     const notify = await resend.emails.send({
-      from: "TradeDebrief <onboarding@tradedb.space>",
+      from: "TradeDebrief <onboarding@traderdb.space>",
       to: "aaronbelinski@gmail.com",
       subject: "New signup",
       html: `<p>${email} just joined from ${form} (source: ${source})</p>`,
