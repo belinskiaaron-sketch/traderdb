@@ -11,6 +11,8 @@ const resend = new Resend(process.env.RESEND_API_KEY);
 app.use(cors());
 app.use(express.json());
 
+app.get("/", (req, res) => res.send("OK"));
+
 app.post("/api/signup", async (req, res) => {
   const { email, form, source } = req.body;
 
