@@ -17,7 +17,7 @@ app.post("/api/signup", async (req, res) => {
   try {
     // 1. Welcome email to user
     await resend.emails.send({
-      from: "TradeDebrief <onboarding@tradedebrief.com>",
+      from: "TradeDebrief <onboarding@tradedb.space>",
       to: email,
       subject: "You're on the TradeDebrief waitlist ⚡",
       html: `
@@ -29,7 +29,7 @@ app.post("/api/signup", async (req, res) => {
 
     // 2. Notify owner
     await resend.emails.send({
-      from: "TradeDebrief <onboarding@tradedebrief.com>",
+      from: "TradeDebrief <onboarding@tradedb.space>",
       to: "aaronbelinski@gmail.com",
       subject: "New signup",
       html: `<p>${email} just joined from ${form} (source: ${source})</p>`,
